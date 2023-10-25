@@ -6,7 +6,6 @@ public class RotateCamera : MonoBehaviour
 {
 
     public float rotationSpeed;
-    private float horizontalInput;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +16,13 @@ public class RotateCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime * horizontalInput);
+        if (Input.GetKey(KeyCode.Period))
+        {
+            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.Comma))
+        {
+            transform.Rotate(-Vector3.up, rotationSpeed * Time.deltaTime);
+        }
     }
 }
