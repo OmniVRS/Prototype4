@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Barrier
+  - Ground
+  - Projectile
+  - Destroyable
+  - Powerup
+  - Enemy
   layers:
   - Default
   - TransparentFX
