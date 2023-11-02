@@ -10,7 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     private GameObject player;
     public bool hasPowerUp = false;
     private float powerupStrength = 15.0f;
-    public GameObject powerupIndicator;
+    //public GameObject powerupIndicator;
 
     // Start is called before the first frame update
     void Start()
@@ -24,18 +24,22 @@ public class EnemyBehavior : MonoBehaviour
     {
         Vector3 attackDirection = (player.transform.position - transform.position).normalized;
         enemyRb.AddForce(attackDirection * speed);
-        powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+        //powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+        if (transform.position.y < -10)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Powerup"))
         {
-            hasPowerUp = true;
+            //hasPowerUp = true;
             Destroy(other.gameObject);
             Debug.Log($"Enemy stole powerup!");
-            powerupIndicator.gameObject.SetActive(true);
-            StartCoroutine(PowerupTimer());
+            //powerupIndicator.gameObject.SetActive(true);
+            //StartCoroutine(PowerupTimer());
         }
     }
 
