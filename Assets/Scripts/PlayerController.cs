@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public bool hasPowerUp = false;
     public float powerupStrength;
     public GameObject powerupIndicator;
+    private bool playerIsDead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,14 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(focalPoint.transform.forward * speed * forwardInput);
         playerRb.AddForce(focalPoint.transform.right * speed * horizontalInput);
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+        if (transform.position.y < -10)
+        {
+            playerIsDead = true;
+        }
+        if (playerIsDead)
+        {
+            StartCoroutine(RestartGame());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -60,5 +70,11 @@ public class PlayerController : MonoBehaviour
         hasPowerUp = false;
         powerupIndicator.gameObject.SetActive(false);
         Debug.Log("Powerup has ended");
+    }
+
+    IEnumerator RestartGame()
+    {
+        yield return null;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
