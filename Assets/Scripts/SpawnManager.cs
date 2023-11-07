@@ -19,7 +19,7 @@ public class SpawnManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         enemyCount = FindObjectsByType<EnemyBehavior>(0).Length;
         if (enemyCount == 0)
